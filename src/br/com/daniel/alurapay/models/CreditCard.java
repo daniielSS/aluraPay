@@ -22,7 +22,7 @@ public class CreditCard {
         return creditLimit;
     }
 
-    public double deductCreditLimit(double value) {
-        return creditLimit - value;
+    public void deductCreditLimit(double value) {
+        this.creditLimit = creditLimit - value;
     }
 }

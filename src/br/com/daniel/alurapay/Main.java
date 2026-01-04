@@ -28,11 +28,7 @@ public class Main {
                 scanner = new Scanner(System.in);
                 double purchaseValue = scanner.nextDouble();
 
-                listTransactions = transaction.saveTransaction(input, purchaseValue, listTransactions, transaction);
-
-                if (!listTransactions.isEmpty()) {
-                    creditCard.deductCreditLimit(purchaseValue);
-                }
+                listTransactions = transaction.saveTransaction(input, purchaseValue, listTransactions, transaction, creditCard);
 
                 System.out.println("-- Digite uma das opções --");
                 System.out.println(" ");
@@ -68,6 +64,8 @@ public class Main {
             System.out.println("* " + transactionItem);
         }
 
+        System.out.println("*                                                                                      *");
+        System.out.println("Limite Atual: " + creditCard.getCreditLimit());
         System.out.println("*                                                                                      *");
         System.out.println("****************************************************************************************");
     }
