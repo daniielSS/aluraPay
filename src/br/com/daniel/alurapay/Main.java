@@ -17,6 +17,7 @@ public class Main {
         System.out.print("Defina seu limite de crédito (Max: " + creditCard.getCreditLimit() + "): ");
         scanner = new Scanner(System.in);
         int value = scanner.nextInt();
+        creditCard.setCreditLimit(value);
 
         while (isActive) {
             if (value < creditCard.getCreditLimit()) {
@@ -48,7 +49,6 @@ public class Main {
                         break;
                     default:
                         System.out.println("Opção Inválida!");
-                        isActive = false;
                         break;
                 }
             }
@@ -65,7 +65,7 @@ public class Main {
         }
 
         System.out.println("*                                                                                      *");
-        System.out.println("Limite Atual: " + creditCard.getCreditLimit());
+        System.out.println("* Limite Atual: " + "R$ " + creditCard.getCreditLimit());
         System.out.println("*                                                                                      *");
         System.out.println("****************************************************************************************");
     }

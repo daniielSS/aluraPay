@@ -22,6 +22,10 @@ public class CreditCard {
         return creditLimit;
     }
 
+    public void setCreditLimit(double creditLimit) {
+        this.creditLimit = creditLimit + 0.01;
+    }
+
     public void deductCreditLimit(double value) {
         this.creditLimit = creditLimit - value;
     }
