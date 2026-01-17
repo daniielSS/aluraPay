@@ -17,10 +17,11 @@ public class Main {
         System.out.print("Defina seu limite de crédito (Max: " + creditCard.getCreditLimit() + "): ");
         scanner = new Scanner(System.in);
         int value = scanner.nextInt();
-        creditCard.setCreditLimit(value);
 
-        while (isActive) {
-            if (value < creditCard.getCreditLimit()) {
+        if (value < creditCard.getCreditLimit()) {
+            creditCard.setCreditLimit(value);
+
+            while (isActive) {
                 System.out.print("Digite a descrição do produto: ");
                 scanner = new Scanner(System.in);
                 String input = scanner.nextLine();
@@ -29,8 +30,13 @@ public class Main {
                 scanner = new Scanner(System.in);
                 double purchaseValue = scanner.nextDouble();
 
-                listTransactions = transaction.saveTransaction(input, purchaseValue, listTransactions, transaction, creditCard);
+                Transaction actualTransaction = transaction.saveTransaction(input, purchaseValue, creditCard);
+                listTransactions.add(actualTransaction);
 
+                if (purchaseValue >= creditCard.getCreditLimit()) {
+                    isActive = false;
+                    break;
+                }
                 System.out.println("-- Digite uma das opções --");
                 System.out.println(" ");
                 System.out.println("[1] - Continuar");
@@ -52,6 +58,8 @@ public class Main {
                         break;
                 }
             }
+        } else {
+            System.err.println("O seu limite de crédito aprovado atual é de R$ " + creditCard.getCreditLimit());
         }
 
         System.out.println(" ");

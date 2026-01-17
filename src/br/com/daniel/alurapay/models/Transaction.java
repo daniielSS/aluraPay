@@ -18,9 +18,11 @@ public class Transaction {
                 "R$ " + purchaseValue;
     }
 
-    public List<Transaction> saveTransaction(String description, double value, List<Transaction> listTransactions, Transaction transaction, CreditCard creditCard) {
-        if (listTransactions != null && transaction != null) {
-            if (!description.isEmpty() || value != 0) {
+    public Transaction saveTransaction(String description, double value, CreditCard creditCard) {
+        Transaction transaction = new Transaction();
+
+        if (!description.isEmpty() || value != 0) {
+            if (value <= creditCard.getCreditLimit()) {
                 Calendar calendar = Calendar.getInstance();
                 Date data = calendar.getTime();
                 DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.DATE_FIELD);
@@ -30,10 +32,11 @@ public class Transaction {
                 transaction.purchaseValue = value;
 
                 creditCard.deductCreditLimit(transaction.purchaseValue);
-                listTransactions.add(transaction);
                 System.out.println("Transação Aprovada com sucesso!");
+            } else {
+                System.err.println("Limite Insuficiente para essa compra!");
             }
         }
-        return listTransactions;
+        return transaction;
     }
 }
