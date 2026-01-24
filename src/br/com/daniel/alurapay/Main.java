@@ -11,6 +11,7 @@ public class Main {
         Transaction transaction = new Transaction();
         CreditCard creditCard = new CreditCard("5127 8108 7729 7191", "Daniel", "Silva", "30-03-2027", "692", 8000.0);
         List<Transaction> listTransactions = new ArrayList<>();
+        List<Transaction> listTransactionsOrdenadas = new ArrayList<>();
         Scanner scanner;
         boolean isActive = true;
 
@@ -69,8 +70,11 @@ public class Main {
         System.out.println("*                                                                                      *");
 
         for (Transaction transactionItem : listTransactions) {
-            System.out.println("* " + transactionItem);
+            listTransactionsOrdenadas.add(transactionItem);
+            Collections.sort(listTransactionsOrdenadas);
         }
+
+        System.out.println(listTransactionsOrdenadas);
 
         System.out.println("*                                                                                      *");
         System.out.println("* Limite Atual: " + "R$ " + creditCard.getCreditLimit());

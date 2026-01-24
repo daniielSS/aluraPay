@@ -5,7 +5,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class Transaction {
+public class Transaction implements Comparable<Transaction> {
 
     private String purchaseDate;
     private String purchaseDescription;
@@ -38,5 +38,16 @@ public class Transaction {
             }
         }
         return transaction;
+    }
+
+    @Override
+    public int compareTo(Transaction transaction) {
+
+        if (purchaseValue < transaction.purchaseValue) {
+            return 1;
+        } else if (purchaseValue > transaction.purchaseValue) {
+            return -1;
+        }
+        return 0;
     }
 }
